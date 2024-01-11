@@ -10,4 +10,4 @@ async def on_ready():
   print(bot.user, bot.user.id)
   print("__________")
 
-bot.run(settings.DISCORD_API_SECRET)
+bot.run(DISCORD_API_SECRET)
