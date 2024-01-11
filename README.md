@@ -1,2 +1,2 @@
-# Ram
+# Blimp
  Discord Moderation/Utility Bot
