@@ -46,17 +46,17 @@ class levelling(commands.Cog, name="levelling"):
             xp_remaining = xp - (50 * ((lvl - 1)**2) + 50 * (lvl - 1))
             boxes = int((xp_remaining / xp_for_level) * 10)
 
-            filled_emoji = "<:levelbarmiddlefilled:1211344248025382992>"
-            unfilled_emoji = "<:levelbarmiddlenofull:1211344243201933412>"
-            start_emoji = "<:levelbarfullstart:1211344244862619658>"
-            end_emoji = "<:levelbarendnotfull:1211344504234188841>"
-            middle_emoji = "<:levelbarmiddle:1211344246443872287>"
+            filled_emoji = ""
+            unfilled_emoji = ""
+            start_emoji = ""
+            end_emoji = ""
+            middle_emoji = ""
 
             progress_bar = start_emoji + (boxes-1)*filled_emoji + middle_emoji + unfilled_emoji*(10-boxes) + end_emoji
 
             embed = discord.Embed(title="", description=f"# {context.author.name}", color=discord.Colour(int("2B2D31", 16)))
-            embed.add_field(name=f"<:greydot:1211378596434944010> XP: {xp}/{int(xp_for_level)}", value="", inline=False)
-            embed.add_field(name=f"<:greydot:1211378596434944010> Level: {lvl}", value="", inline=False)
+            embed.add_field(name=f" XP: {xp}/{int(xp_for_level)}", value="", inline=False)
+            embed.add_field(name=f" Level: {lvl}", value="", inline=False)
             
             # Calculate rank based on XP
             sorted_users = sorted(self.leveldata.items(), key=lambda x: x[1], reverse=True)
