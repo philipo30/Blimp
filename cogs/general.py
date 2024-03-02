@@ -6,6 +6,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 from discord.ext.commands import Context
+import psutil
 
 
 class General(commands.Cog, name="general"):
@@ -58,16 +59,17 @@ class General(commands.Cog, name="general"):
         for i in self.bot.cogs:
             if i == "owner" and not (await self.bot.is_owner(context.author)):
                 continue
-            cog = self.bot.get_cog(i.lower())
-            commands = cog.get_commands()
-            data = []
-            for command in commands:
-                description = command.description.partition("\n")[0]
-                data.append(f"{prefix}{command.name} - {description}")
-            help_text = "\n".join(data)
-            embed.add_field(
-                name=i.capitalize(), value=f"```{help_text}```", inline=False
-            )
+            cog = self.bot.get_cog(i)
+            if cog is not None:
+                commands = cog.get_commands()
+                data = []
+                for command in commands:
+                    description = command.description.partition("\n")[0]
+                    data.append(f"{prefix}{command.name} - {description}")
+                help_text = "\n".join(data)
+                embed.add_field(
+                    name=i.capitalize(), value=f"```{help_text}```", inline=False
+                )
         await context.send(embed=embed)
 
     @commands.hybrid_command(
@@ -76,11 +78,11 @@ class General(commands.Cog, name="general"):
     )
     async def botinfo(self, context: Context) -> None:
         embed = discord.Embed(
-            description="Used [Krypton's](https://krypton.ninja) template",
+            description="Developed by philip30 (884457992026722315)",
             color=0xBEBEFE,
         )
         embed.set_author(name="Bot Information")
-        embed.add_field(name="Owner:", value="Krypton#7331", inline=True)
+        embed.add_field(name="Owner:", value="philip30#0", inline=True)
         embed.add_field(
             name="Python Version:", value=f"{platform.python_version()}", inline=True
         )
@@ -88,6 +90,26 @@ class General(commands.Cog, name="general"):
             name="Prefix:",
             value=f"/ (Slash Commands) or {self.bot.config['prefix']} for normal commands",
             inline=False,
+        )
+        embed.add_field(
+            name="`System Resource Usage`",
+            value = "",
+            inline = False,
+        )
+        embed.add_field(
+            name="CPU Usage",
+            value=f'`{psutil.cpu_percent()}%`',
+            inline=False
+        )
+        embed.add_field(
+            name="Memory Usage",
+            value=f'`{psutil.virtual_memory().percent}%`',
+            inline=True
+        )
+        embed.add_field(
+            name="Available Memory",
+            value=f'`{psutil.virtual_memory().available * 100 / psutil.virtual_memory().total}%`',
+            inline=True
         )
         embed.set_footer(text=f"Requested by {context.author}")
         await context.send(embed=embed)
@@ -151,7 +173,7 @@ class General(commands.Cog, name="general"):
     )
     async def server(self, context: Context) -> None:
         embed = discord.Embed(
-            description=f"Join the support server for the bot by clicking [here](https://discord.gg/mTBrXyWxAF).",
+            description=f"Join the support server for the bot by clicking [here](https://discord.gg/HQ3swQPRvq).",
             color=0xD75BF4,
         )
         try:
@@ -189,6 +211,7 @@ class General(commands.Cog, name="general"):
             "Very doubtful.",
             "uhh... I don't know.",
             "who asked?",
+            "Bruh"
         ]
         embed = discord.Embed(
             title="**My Answer:**",
