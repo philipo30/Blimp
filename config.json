@@ -1,7 +1,7 @@
 {
-  "prefix": "!",
+  "prefix": "yourbotsprefix",
   "invite_link": "The invite link from your Discord bot",
-  "welcome_channel": 1212403993444360194,
-  "my_bot_token": "MTE0MjQyOTg2MzYxODI5Nzk3Nw.GxP3Zn.SrR4oDUImI_8I8lUb_U_87hUmAd1Vr_8ORT4oY",
+  "welcome_channel": your welcome channel Id,
+  "my_bot_token": "Your bot token",
   "color": "2B2D31"
 }
